@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sii-fitter"
+version = "0.1.0"
+description = "Automatic, reviewed, and manual Si II 6355/5972 fitting for supernova spectra"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "lmfit>=1.2",
+    "matplotlib>=3.7",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "PyAstronomy>=0.21",
+    "scipy>=1.10",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "ruff>=0.6",
+]
+
+[project.scripts]
+sii-fit = "sii_fitter.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["sii_fitter*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+ignore = ["E501"]
