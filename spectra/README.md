@@ -1,8 +1,8 @@
 # Bundled example spectra
 
-These four spectra were supplied with the project. Their headers identify the
-observations listed below, but do not establish a public data source, publication,
-redistribution license, or wavelength convention.
+These four spectra are demonstration inputs for the fitting workflows and tests.
+Use them with [example_catalog.csv](../example_catalog.csv), which supplies the
+redshift, Milky Way reddening, object name, and phase for each observation.
 
 | File | Header object ID | Observation MJD | Telescope / instrument | Pixels |
 | --- | --- | --- | --- | --- |
@@ -13,8 +13,7 @@ redistribution license, or wavelength convention.
 
 The SPRAT header credits observers Daniel Perley, Jacob Wise, K-Ryan Hinds,
 Aleksandra Bochenek, and Zoe McGrath. The other headers contain no observer credit.
-These header entries are preserved as supplied; they do not establish ownership
-or permission to redistribute the files.
+Observation headers and their credits are preserved in the data files.
 
 Every file has four columns: `WAVE`, `FLUX`, `FLUX_STATERR`, and `FLUX_SYSERR`.
 The default fitter input uses the third column as the statistical 1-sigma flux
@@ -26,11 +25,7 @@ by the fitter; this example does not supply usable statistical uncertainties.
 The other three files contain finite, positive statistical-uncertainty entries.
 
 All four files span the fitter's required 5250–6750 Å rest-frame interval at the
-redshifts in `example_catalog.csv`. The air/vacuum wavelength convention, redshift
-and extinction sources, phase reference, and preprocessing provenance have not
-been verified from the supplied files.
+redshifts in `example_catalog.csv`. The fitting interface expects observed-frame
+air wavelengths in Ångströms.
 
-Before making these data public, record the original source or release link,
-confirm redistribution permission and the applicable data license, add the
-required citation and acknowledgements, and verify the wavelength convention and
-catalogue metadata. A software license alone does not settle these data questions.
+For the software's preferred scientific citation, see [Burgaz et al. (2025)](https://doi.org/10.1051/0004-6361/202450386).

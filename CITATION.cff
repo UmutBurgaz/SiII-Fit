@@ -1,0 +1,95 @@
+cff-version: 1.2.0
+message: "If you use SiII-Fit in your research, please cite the preferred reference below."
+type: software
+title: SiII-Fit
+abstract: "Automatic, reviewed, and manual Si II 6355/5972 fitting for supernova spectra."
+authors:
+  - family-names: Burgaz
+    given-names: Umut
+repository-code: "https://github.com/UmutBurgaz/SiII-Fit"
+url: "https://github.com/UmutBurgaz/SiII-Fit"
+version: 0.1.0
+license: MIT
+keywords:
+  - supernovae
+  - spectroscopy
+  - silicon
+  - astronomy
+preferred-citation:
+  type: article
+  title: "ZTF SN Ia DR2: The spectral diversity of Type Ia supernovae in a volume-limited sample"
+  authors:
+    - family-names: "Burgaz"
+      given-names: "U."
+    - family-names: "Maguire"
+      given-names: "K."
+    - family-names: "Dimitriadis"
+      given-names: "G."
+    - family-names: "Harvey"
+      given-names: "L."
+    - family-names: "Senzel"
+      given-names: "R."
+    - family-names: "Sollerman"
+      given-names: "J."
+    - family-names: "Nordin"
+      given-names: "J."
+    - family-names: "Galbany"
+      given-names: "L."
+    - family-names: "Rigault"
+      given-names: "M."
+    - family-names: "Smith"
+      given-names: "M."
+    - family-names: "Goobar"
+      given-names: "A."
+    - family-names: "Johansson"
+      given-names: "J."
+    - family-names: "Rosnet"
+      given-names: "P."
+    - family-names: "Alburai"
+      given-names: "A."
+    - family-names: "Amenouche"
+      given-names: "M."
+    - family-names: "Deckers"
+      given-names: "M."
+    - family-names: "Dhawan"
+      given-names: "S."
+    - family-names: "Ginolin"
+      given-names: "M."
+    - family-names: "Kim"
+      given-names: "Y.-L."
+    - family-names: "Miller"
+      given-names: "A. A."
+    - family-names: "Muller-Bravo"
+      given-names: "T. E."
+    - family-names: "Nugent"
+      given-names: "P. E."
+    - family-names: "Terwel"
+      given-names: "J. H."
+    - family-names: "Dekany"
+      given-names: "R."
+    - family-names: "Drake"
+      given-names: "A."
+    - family-names: "Graham"
+      given-names: "M. J."
+    - family-names: "Groom"
+      given-names: "S. L."
+    - family-names: "Kasliwal"
+      given-names: "M. M."
+    - family-names: "Kulkarni"
+      given-names: "S. R."
+    - family-names: "Nolan"
+      given-names: "K."
+    - family-names: "Nir"
+      given-names: "G."
+    - family-names: "Riddle"
+      given-names: "R. L."
+    - family-names: "Rusholme"
+      given-names: "B."
+    - family-names: "Sharma"
+      given-names: "Y."
+  journal: "Astronomy & Astrophysics"
+  volume: "694"
+  start: A9
+  year: 2025
+  doi: "10.1051/0004-6361/202450386"
+  url: "https://doi.org/10.1051/0004-6361/202450386"

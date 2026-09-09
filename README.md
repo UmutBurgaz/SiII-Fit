@@ -1,14 +1,20 @@
-# Si II Fitter
+# SiII-Fit
 
-`sii-fitter` measures the Si II λ6355 and λ5972 features in supernova spectra. It supports a fully automatic batch workflow, a lightweight review workflow, and manual continuum placement. Background selection and fitting can run together or as two separately inspectable stages.
+[![Tests](https://github.com/UmutBurgaz/SiII-Fit/actions/workflows/ci.yml/badge.svg)](https://github.com/UmutBurgaz/SiII-Fit/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![DOI](https://img.shields.io/badge/DOI-10.1051%2F0004--6361%2F202450386-blue)](https://doi.org/10.1051/0004-6361/202450386)
 
-This is research software. Automatic fits should not be treated as scientifically valid without inspecting the diagnostic plots and quality columns.
+SiII-Fit measures the Si II λ6355 and λ5972 features in supernova spectra. It supports automatic batch fitting, interactive review, and manual continuum placement. Background selection and fitting can run together or as two separate stages. The Python package is installed as `sii-fitter` and provides the `sii-fit` command.
+
+Inspect the diagnostic plots and quality columns when interpreting automatic fits. For the associated scientific study, see [Burgaz et al. (2025)](https://doi.org/10.1051/0004-6361/202450386).
 
 ## Installation
 
 Python 3.10 or newer is required.
 
 ```bash
+git clone https://github.com/UmutBurgaz/SiII-Fit.git
+cd SiII-Fit
 python -m venv .venv
 source .venv/bin/activate             # macOS / Linux
 python -m pip install --upgrade pip
@@ -16,7 +22,7 @@ python -m pip install -e .
 ```
 
 In Windows PowerShell, use `.\.venv\Scripts\Activate.ps1` in place of `source`.
-If script activation is restricted, run `.\.venv\Scripts\python.exe -m pip install -e ".[dev]"`
+If script activation is restricted, run `.\.venv\Scripts\python.exe -m pip install -e .`
 and use `.\.venv\Scripts\python.exe -m sii_fitter` in place of `sii-fit`.
 
 For development and tests, use `python -m pip install -e '.[dev]'`.
@@ -70,7 +76,7 @@ The old `original` and `homogenised` format values are accepted as aliases for `
 | A large sample | `auto`, inspect QC/plots, then rerun flagged spectra in `review` or `manual` |
 | Team-curated continua | Separate `background` and `fit` stages |
 
-`auto` never asks questions. `review` shows automatic anchors and asks only whether to accept the background and fit; rejecting the background opens the four-click selector. `manual` opens that selector immediately. There are no Hα, sodium, or unrelated classification prompts.
+`auto` never asks questions. `review` shows automatic anchors and asks whether to accept the background and fit; rejecting the background opens the four-click selector. `manual` opens that selector immediately.
 
 For a mixed run, add a `mode` column:
 
@@ -152,7 +158,7 @@ summary = run_catalog("catalog.csv", "results", config=config, resume=True)
 print(summary)
 ```
 
-Advanced automatic-anchor bounds and fit constraints are fields on `FitConfig`, rather than private constants hidden in runner scripts.
+Advanced automatic-anchor bounds and fit constraints can be set through `FitConfig`.
 
 ## Outputs
 
@@ -182,13 +188,13 @@ Velocities and FWHM values are in 10³ km s⁻¹. Equivalent widths are in Å. W
 - `sii_fitter/catalog.py`: minimal/legacy catalogue validation and path resolution.
 - `sii_fitter/pipeline.py`: restartable batch and interactive orchestration.
 - `sii_fitter/cli.py`: `sii-fit` command-line interface.
-- `sii_fitter/style.py`: self-contained Matplotlib settings; no private `georgios` style dependency.
+- `sii_fitter/style.py`: Matplotlib settings with portable font selection.
 - `examples/`: automatic and manual runnable examples.
 - `tests/`: catalogue, style, and numerical utility checks.
 
 ## Scientific assumptions and current limits
 
-- The input wavelength scale is assumed to be observed-frame air Ångströms, matching the [NIST Si II air line wavelengths](https://www.physics.nist.gov/PhysRefData/Handbook/Tables/silicontable2.htm). Verify the wavelength convention of each data source, including the example spectra, whose headers do not specify it.
+- Inputs use observed-frame air Ångströms, matching the [NIST Si II air line wavelengths](https://www.physics.nist.gov/PhysRefData/Handbook/Tables/silicontable2.htm). Convert vacuum wavelengths before fitting.
 - The first uncertainty column, when used, is assumed to be a 1σ error.
 - The continuum is locally linear in the selected windows.
 - The two Si II doublets are represented by coupled Gaussian components with configurable velocity/FWHM ratios and equal component amplitudes within each doublet.
@@ -199,7 +205,31 @@ Velocities and FWHM values are in 10³ km s⁻¹. Equivalent widths are in Å. W
 - Interactive modes require a Matplotlib GUI backend and therefore should not be run on a headless worker.
 - Parallel workers are intentionally not enabled for interactive modes. For large automatic jobs, split the catalogue with `--start/--end`, use separate output directories, and combine reviewed tables only after checking unique `record_id` values.
 
-Before a public release, choose a repository license and add the preferred citation/data-release attribution, including permission and attribution for the bundled example spectra and any adapted algorithms. Those are authorship decisions and are intentionally not guessed here. See [the review and release notes](docs/REVIEW.md) for validation evidence and remaining checks.
+## Citation
+
+If you use SiII-Fit in your research, please cite:
+
+**Burgaz, U., et al. (2025).** *ZTF SN Ia DR2: The spectral diversity of Type Ia supernovae in a volume-limited sample.* Astronomy & Astrophysics, **694**, A9. [doi:10.1051/0004-6361/202450386](https://doi.org/10.1051/0004-6361/202450386).
+
+```bibtex
+@article{Burgaz2025SpectralDiversity,
+  author  = {Burgaz, U. and others},
+  title   = {{ZTF SN Ia DR2}: The spectral diversity of {Type Ia} supernovae in a volume-limited sample},
+  journal = {Astronomy \& Astrophysics},
+  year    = {2025},
+  volume  = {694},
+  pages   = {A9},
+  doi     = {10.1051/0004-6361/202450386}
+}
+```
+
+[CITATION.cff](CITATION.cff) provides machine-readable metadata and the preferred paper citation for GitHub's **Cite this repository** feature.
+
+## License and acknowledgements
+
+The software and documentation are released under the [MIT license](LICENSE).
+
+The smoothing and clipping routines retain their attribution to D'Arcy's routines in the source code; the smoothing calibration follows Siebert et al. (2019). Dependencies retain their own licenses. Observation credits and input-column details for the bundled examples are in [spectra/README.md](spectra/README.md).
 
 ## Development
 
@@ -209,4 +239,4 @@ ruff check .
 pytest
 ```
 
-GitHub Actions runs installation, lint, tests, and package builds on Linux (Python 3.10 and 3.13) and Windows (Python 3.13). GUI interaction and scientific validation against independently reviewed measurements still require manual checks.
+GitHub Actions runs installation, lint, tests, and package builds on Linux (Python 3.10 and 3.13) and Windows (Python 3.13). Please report bugs through [GitHub Issues](https://github.com/UmutBurgaz/SiII-Fit/issues), including the command used, package versions, and a minimal reproducible example.

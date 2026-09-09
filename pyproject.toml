@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,6 +7,9 @@ name = "sii-fitter"
 version = "0.1.0"
 description = "Automatic, reviewed, and manual Si II 6355/5972 fitting for supernova spectra"
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Umut Burgaz"}]
 requires-python = ">=3.10"
 dependencies = [
     "lmfit>=1.2",
@@ -16,6 +19,12 @@ dependencies = [
     "PyAstronomy>=0.21",
     "scipy>=1.10",
 ]
+
+[project.urls]
+Homepage = "https://github.com/UmutBurgaz/SiII-Fit"
+Repository = "https://github.com/UmutBurgaz/SiII-Fit"
+Issues = "https://github.com/UmutBurgaz/SiII-Fit/issues"
+Publication = "https://doi.org/10.1051/0004-6361/202450386"
 
 [project.optional-dependencies]
 dev = [
